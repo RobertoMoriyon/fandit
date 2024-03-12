@@ -1,5 +1,6 @@
 import streamlit as st
 from boes_comunidades.galicia import boe_galicia
+from bs4 import BeautifulSoup
 
 
 st.title('Fandit Subvenciones')
