@@ -1,6 +1,7 @@
 import streamlit as st
 from boes_comunidades.galicia import boe_galicia
 from boes_provincias.alava import boe_alava
+from boes_provincias.gipuzkoa import boe_gipuzkoa
 from bs4 import BeautifulSoup
 
 
@@ -12,8 +13,9 @@ datos_boe = []
 mensaje = ''
 datos_galicia = []
 datos_alava = []
+datos_gipuzkoa = []
 # Palabras a verificar
-palabras_a_verificar = ["subvención", "extracto", "BDNS", "transitoria"]
+palabras_a_verificar = ["subvención", "extracto", "BDNS", "subvenciones"]
 
 def get_datos_fecha(fecha):
     # Obtener el día y llenar con ceros a la izquierda si es necesario
@@ -40,6 +42,7 @@ with st.form(key='form'):
         # Datos del BOE: GALICIA
         datos_galicia, url_galicia = boe_galicia(dia, mes, anno, palabras_a_verificar)
         datos_alava, url_alava = boe_alava(dia, mes, anno, palabras_a_verificar)
+        datos_gipuzkoa, url_gipuzkoa = boe_gipuzkoa(dia, mes, anno, palabras_a_verificar)
 
 # Fuera del Formulario
 st.write("<strong>Fecha seleccionada: </strong>", fecha_elegida, unsafe_allow_html=True)
@@ -61,7 +64,16 @@ if datos_alava:
     for termino in datos_alava:
         st.write(termino)
     st.write(f"Este es el link al BOE: [link]({url_alava})")
-
 else:
     st.header("Subvenciones de ALAVA")
     st.write(f"Este día no se han encontrado las palabras: {palabras_a_verificar} para ALAVA Comunidad")
+
+if datos_gipuzkoa:
+    st.header("Subvenciones de GIPUZKOA")
+    st.write(f"Para el día: {dia}/{mes}/{anno}, se han econtrado las siguientes palabras")
+    for termino in datos_gipuzkoa:
+        st.write(termino)
+    st.write(f"Este es el link al BOE: [link]({url_gipuzkoa})")
+else:
+    st.header("Subvenciones de GIPUZKOA")
+    st.write(f"Este día no se han encontrado las palabras: {palabras_a_verificar} para GIPUZKOA Comunidad")
