@@ -1,5 +1,6 @@
 import streamlit as st
 from boes_comunidades.galicia import boe_galicia
+from boes_provincias.alava import boe_alava
 from bs4 import BeautifulSoup
 
 
@@ -10,6 +11,7 @@ st.write('Bienvenido a Fandit Subvenciones, una aplicación que te ayudará a en
 datos_boe = []
 mensaje = ''
 datos_galicia = []
+datos_alava = []
 # Palabras a verificar
 palabras_a_verificar = ["subvención", "extracto", "BDNS", "transitoria"]
 
@@ -36,8 +38,8 @@ with st.form(key='form'):
         # datos_boe, mensaje = boe_data(dia, mes, anno, palabras_a_verificar)
 
         # Datos del BOE: GALICIA
-        datos_galicia, url_encontrada = boe_galicia(dia, mes, anno, palabras_a_verificar)
-        print(datos_galicia)
+        datos_galicia, url_galicia = boe_galicia(dia, mes, anno, palabras_a_verificar)
+        datos_alava, url_alava = boe_alava(dia, mes, anno, palabras_a_verificar)
 
 # Fuera del Formulario
 st.write("<strong>Fecha seleccionada: </strong>", fecha_elegida, unsafe_allow_html=True)
@@ -47,8 +49,19 @@ if datos_galicia:
     st.write(f"Para el día: {dia}/{mes}/{anno}, se han econtrado las siguientes palabras")
     for termino in datos_galicia:
         st.write(termino)
-    st.write(f"Este es el link al BOE: [link]({url_encontrada})")
+    st.write(f"Este es el link al BOE: [link]({url_galicia})")
 
 else:
     st.header("Subvenciones de GALICIA")
     st.write(f"Este día no se han encontrado las palabras: {palabras_a_verificar} para GALICIA Comunidad")
+
+if datos_alava:
+    st.header("Subvenciones de ALAVA")
+    st.write(f"Para el día: {dia}/{mes}/{anno}, se han econtrado las siguientes palabras")
+    for termino in datos_alava:
+        st.write(termino)
+    st.write(f"Este es el link al BOE: [link]({url_alava})")
+
+else:
+    st.header("Subvenciones de ALAVA")
+    st.write(f"Este día no se han encontrado las palabras: {palabras_a_verificar} para ALAVA Comunidad")
