@@ -14,7 +14,6 @@ def buscar_terminos_en_pagina(url, palabras_buscar):
     # Analizar el HTML con BeautifulSoup
     soup = BeautifulSoup(html_content, 'html.parser')
 
-    # Buscar los términos en el texto de la página
     terminos_encontrados = []
 
     for termino in palabras_buscar:
@@ -24,7 +23,7 @@ def buscar_terminos_en_pagina(url, palabras_buscar):
     return terminos_encontrados
 
 
-def boe_gipuzkoa(dia_boe, mes_boe, anno_boe, palabras):
-    url = (f'https://egoitza.gipuzkoa.eus/gao-bog/castell/bog/{anno_boe}/{mes_boe}/{dia_boe}/bc24{mes_boe}{dia_boe}.htm')
+def boe_castilla_mancha(dia_boe, mes_boe, anno_boe, palabras):
+    url = (f'https://docm.jccm.es/docm/cambiarBoletin.do?fecha={anno_boe}{mes_boe}{dia_boe}')
     terminos = buscar_terminos_en_pagina(url, palabras)
     return terminos, url

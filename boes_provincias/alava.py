@@ -1,9 +1,5 @@
-
-
-
 import requests
 from bs4 import BeautifulSoup
-
 
 def buscar_terminos_en_pagina(url, palabras_buscar):
     # Obtener el contenido HTML de la página
@@ -26,14 +22,6 @@ def buscar_terminos_en_pagina(url, palabras_buscar):
         if soup.body and termino.lower() in soup.body.get_text().lower():
             terminos_encontrados.append(termino)
 
-    # Imprimir resultados
-    if terminos_encontrados:
-        print(f"Se encontraron los siguientes términos en la página {url}:")
-        for termino_encontrado in terminos_encontrados:
-            print(f"- {termino_encontrado}")
-    else:
-        print(f"No se encontraron términos en la página {url}")
-
     return terminos_encontrados
 
 
@@ -41,6 +29,5 @@ def boe_alava(dia_boe, mes_boe, anno_boe, palabras):
     # https://www.araba.eus/botha/Inicio/SGBO5001.aspx?FechaBotha=04/03/2024
     url = (
         f'https://www.araba.eus/botha/Inicio/SGBO5001.aspx?FechaBotha={dia_boe}/{mes_boe}/{anno_boe}')
-    print("alava url", url)
     terminos = buscar_terminos_en_pagina(url, palabras)
     return terminos, url

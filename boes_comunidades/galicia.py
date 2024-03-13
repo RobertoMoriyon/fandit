@@ -27,14 +27,6 @@ def buscar_terminos_en_pagina(url, palabras_buscar):
         if soup.body and termino.lower() in soup.body.get_text().lower():
             terminos_encontrados.append(termino)
 
-    # Imprimir resultados
-    if terminos_encontrados:
-        print(f"Se encontraron los siguientes términos en la página {url}:")
-        for termino_encontrado in terminos_encontrados:
-            print(f"- {termino_encontrado}")
-    else:
-        print(f"No se encontraron términos en la página {url}")
-
     return terminos_encontrados
 
 
