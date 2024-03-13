@@ -26,7 +26,7 @@ datos_extremadura = []
 datos_alava = []
 datos_gipuzkoa = []
 # Palabras a verificar
-palabras_a_verificar = ["subvención", "extracto", "BDNS", "subvenciones"]
+palabras_a_verificar = ["subvención", "extracto", "BDNS", "subvenciones", "subven"]
 
 def get_datos_fecha(fecha):
     # Obtener el día y llenar con ceros a la izquierda si es necesario
