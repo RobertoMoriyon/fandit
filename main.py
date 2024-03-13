@@ -7,6 +7,7 @@ from boes_comunidades.murcia import boe_murcia
 from boes_comunidades.extremadura import boe_extremadura
 from boes_provincias.alava import boe_alava
 from boes_provincias.gipuzkoa import boe_gipuzkoa
+from boes_provincias.pontevedra import boe_pontevedra
 from bs4 import BeautifulSoup
 
 st.title('Fandit')
@@ -25,6 +26,7 @@ datos_murcia = []
 datos_extremadura = []
 datos_alava = []
 datos_gipuzkoa = []
+datos_pontevedra = []
 # Palabras a verificar
 palabras_a_verificar = ["subvención", "extracto", "BDNS", "subvenciones", "subven"]
 
@@ -65,6 +67,7 @@ with st.form(key='form'):
         # Datos del BO Provincias:
         datos_alava, url_alava = boe_alava(dia, mes, anno, palabras_a_verificar)
         datos_gipuzkoa, url_gipuzkoa = boe_gipuzkoa(dia, mes, anno, palabras_a_verificar)
+        datos_pontevedra, url_pontevedra = boe_pontevedra(dia, mes, anno, palabras_a_verificar)
 
         # Cambiamos boton sumbit a True
         boton_submit = True
@@ -113,3 +116,9 @@ if boton_submit:
         else:
             st.header("Gipuzkoa")
             st.write(f"Este día no se han encontrado las palabras: {palabras_a_verificar}")
+
+        if datos_pontevedra:
+            escribir_datos("Pontevedra", datos_pontevedra, url_pontevedra)
+        else:
+            st.header("Pontevedra")
+            st.write(f"❌ Este día no se han encontrado las palabras: {palabras_a_verificar}")
