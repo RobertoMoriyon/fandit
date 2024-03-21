@@ -12,6 +12,7 @@ from boes_provincias.coruna import boe_coruna
 from boes_provincias.ourense import boe_ourense
 from boes_provincias.valladolid import boe_valladolid
 from boes_provincias.salamanca import boe_salamanca
+from boes_provincias.avila import boe_avila
 
 from bs4 import BeautifulSoup
 
@@ -36,6 +37,8 @@ datos_coruna = []
 datos_ourense = []
 datos_valladolid = []
 datos_salamanca = []
+datos_avila = []
+
 # Palabras a verificar
 palabras_a_verificar = ["subvención", "extracto", "BDNS", "subvenciones", "subven"]
 
@@ -81,6 +84,7 @@ with st.form(key='form'):
         datos_ourense, url_ourense = boe_ourense(dia, mes, anno, palabras_a_verificar)
         datos_valladolid, url_valladolid = boe_valladolid(dia, mes, anno, palabras_a_verificar)
         datos_salamanca, url_salamanca = boe_salamanca(dia, mes, anno, palabras_a_verificar)
+        # datos_avila, url_avila = boe_avila(dia, mes, anno, palabras_a_verificar)
 
         # Cambiamos boton sumbit a True
         boton_submit = True
@@ -159,3 +163,11 @@ if boton_submit:
         else:
             st.header("Salamanca")
             st.write(f"❌ Este día no se han encontrado las palabras: {palabras_a_verificar}")
+
+        '''Problema porque subvenciones esta en un sub-menu del codigo
+        if datos_avila:
+            escribir_datos("Ávila", datos_avila, url_avila)
+        else:
+            st.header("Ávila")
+            st.write(f"❌ Este día no se han encontrado las palabras: {palabras_a_verificar}")
+        '''
